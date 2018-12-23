@@ -1,0 +1,49 @@
+apt install -y libapache2-mod-php7.0 \
+      php7.0-gd php7.0-json php7.0-mysql php7.0-curl \
+      php7.0-intl php7.0-mcrypt php-imagick \
+      php7.0-zip php7.0-xml php7.0-mbstring
+
+
+
+service apache2 restart
+
+
+
+echo 'deb http://download.owncloud.org/download/repositories/production/Ubuntu_16.04/ /' > /etc/apt/sources.list.d/owncloud.list
+
+
+
+apt-get update
+
+
+
+apt-get install owncloud-files
+
+
+
+mysql -u root -p
+
+
+
+CREATE DATABASE owncloud;
+
+
+
+Create mysql user and grant access to the owncloud database
+
+CREATE USER ‘owncloud’@‘localhost' IDENTIFIED BY ‘password’;
+
+GRANT ALL ON owncloud.* to 'owncloud'@'localhost';
+
+
+
+FLUSH PRIVILEGES;
+exit
+
+
+
+nano /etc/apache2/sites-available/000-default.conf
+
+service apache2 restart
+
+
